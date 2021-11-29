@@ -7,26 +7,29 @@ class Window(Tk):
         super(Window, self).__init__()
         self.title("Seam Carving")
         self.minsize(512,384)
-
+        self.fileName = ''
+        self.types = [("jpeg","*.jpg"),("png","*.png")]
         self.openFileButton()
-        self.CarveButton()
-
+        
     def openFileButton(self):
         self.openFileButton = Button(self, text = "Browse File",command=self.fileWindow)
         self.openFileButton.grid(column=0,row=0)
+    
+    def fileWindow(self):
+        
+        self.fileName = filedialog.askopenfilename(initialdir= "/Desktop", title="Select Image", filetypes=self.types)
+        #self.CarveButton['state'] = NORMAL
+        self.CarveButton()
+
 
     def CarveButton(self):
-        self.CarveButton = Button(self, text = "Crop",command=None, state=DISABLED)
+        print("File Selected:",self.fileName)
+        self.CarveButton = Button(self, text = "Crop", command=sc.Image(self.fileName).write, state=NORMAL)
         self.CarveButton.grid(column=0,row=1)
 
-    def fileWindow(self):
-        self.types = [("jpeg","*.jpg"),("png","*.png")]
-        self.fileName = filedialog.askopenfilename(initialdir= "/Desktop", title="Select Image", filetypes=self.types)
-        self.CarveButton['state'] = NORMAL
-        print("File Selected:",self.fileName)
 
     
+        # print("File Selected:",self.fileName)
 
-if __name__ == '__main__':
-    window = Window()
-    window.mainloop()
+
+

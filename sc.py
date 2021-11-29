@@ -3,15 +3,20 @@ import numpy as np
 import os, sys
 from imageio import imread, imwrite
 
+class Image():
+    def __init__(self, file):
+        self.file = file
+        self.img = imread(self.file)
 
-def main():
+    def write(self):
+            imwrite('test.png', self.img[:len(self.img)//2])
 
-    #img = imread(sys.argv[1])
-    #img = imread('dice.png')
-    #print(img)
-    def write(file):
-        img = imread(file)
-        imwrite('dice2.png', img[:len(img)//2])
+# def main():
 
-if __name__ == '__main__':
-    main()
+#     #img = imread(sys.argv[1])
+#     #img = imread('dice.png')
+#     #print(img)
+    
+
+# if __name__ == '__main__':
+#     main()
